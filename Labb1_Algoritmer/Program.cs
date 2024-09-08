@@ -1,12 +1,12 @@
 ﻿///Labb1 - Algoritmer
 ///av Henrik Vu .NET24
 
-Console.WriteLine("Please enter an input\n");
+Console.WriteLine("Please enter an input");
 string userInput = Console.ReadLine();
+Console.WriteLine();
 string loopString = string.Empty;
 string holdString = string.Empty;
 string redString = string.Empty;
-long tempResult = 0;
 long totalResult = 0;
 int startIndex = 0;
 int count = 0;
@@ -38,7 +38,7 @@ for (int i = 0; i < userInput.Length; i++)
         }
 
         //redTextResult
-        long.TryParse(redString, out tempResult);
+        long.TryParse(redString, out long tempResult);
         totalResult += tempResult;
 
         count = 0;
