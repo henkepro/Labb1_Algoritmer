@@ -31,7 +31,7 @@ for (int i = 0; i < userInput.Length; i++)
         }
 
         //After text
-        Console.ForegroundColor = ConsoleColor.White;
+        Console.ForegroundColor = ConsoleColor.Gray;
         for (int j = 1; j + count + startIndex < userInput.Length; j++)
         {
             Console.Write(userInput[j + count + startIndex]);
