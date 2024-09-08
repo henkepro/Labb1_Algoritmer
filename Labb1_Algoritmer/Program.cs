@@ -7,10 +7,10 @@ Console.WriteLine();
 string loopString = string.Empty;
 string holdString = string.Empty;
 string redString = string.Empty;
-long totalResult = 0;
+Int128 totalResult = 0;
 int startIndex = 0;
 int count = 0;
-
+//12341241890111122222123321333333
 for (int i = 0; i < userInput.Length; i++)
 {
     loopString = userInput[i].ToString();
@@ -38,7 +38,7 @@ for (int i = 0; i < userInput.Length; i++)
         }
 
         //redTextResult
-        long.TryParse(redString, out long tempResult);
+        Int128.TryParse(redString, out Int128 tempResult);
         totalResult += tempResult;
 
         count = 0;
