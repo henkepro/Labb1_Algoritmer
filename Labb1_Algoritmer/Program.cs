@@ -1,81 +1,63 @@
 ﻿///Labb1 - Algoritmer
 ///av Henrik Vu .NET24
 
-Console.WriteLine("Mata in en text!");
+Console.WriteLine("Please enter an input\n");
 string userInput = Console.ReadLine();
-Console.WriteLine("----------------");
+string loopString = string.Empty;
 string holdString = string.Empty;
-string compareStrings = string.Empty;
-string stringNumber = string.Empty;
-string stringResult = string.Empty;
+string redString = string.Empty;
+long tempResult = 0;
 long totalResult = 0;
-long tempoResult = 0;
-int holdIndex = 0;
-int firstTxIndex = 0;
-int redTxIndex = 0;
-int lastTxIndex = 0;
-bool isTextRed = false;
+int startIndex = 0;
+int count = 0;
 
 for (int i = 0; i < userInput.Length; i++)
 {
-    compareStrings = userInput[i].ToString();
-    if (holdString == compareStrings && char.IsDigit(holdString[0]))
+    loopString = userInput[i].ToString();
+    if (holdString == loopString && char.IsDigit(holdString[0]))
     {
-        holdIndex++;
-        lastTxIndex++;
-        isTextRed = true;
-    }
-    else if (i == userInput.Length - 1 || char.IsLetter(userInput[i]) || userInput[i] == '+'
-        || userInput[i] == '-' || userInput[i] == '/' || userInput[i] == '*')
-    {
-        holdIndex++;
-        i = holdIndex;
-        lastTxIndex = i;
-        firstTxIndex++;
-        redTxIndex = 0;
-        holdString = userInput[holdIndex].ToString();
-    }
-    if (isTextRed)
-    {
-        //First text before red text
-        Console.ForegroundColor = ConsoleColor.Gray;
-        for (int j = 0; j < firstTxIndex; j++)
+        //Before text
+        for (int j = 0; j < startIndex; j++)
         {
             Console.Write(userInput[j]);
         }
 
         //Red text
         Console.ForegroundColor = ConsoleColor.Red;
-        for (int j = 0; j <= redTxIndex; j++)
+        for (int j = 0; j < count + 1; j++)
         {
-            stringNumber = userInput[j + firstTxIndex].ToString();
-            stringResult += stringNumber;
-            Console.Write(stringNumber);
+            Console.Write(userInput[j + startIndex]);
+            redString += userInput[j + startIndex].ToString();
         }
 
-        //Last text after red text
-        Console.ForegroundColor = ConsoleColor.Gray;
-        for (int j = 0; j < userInput.Length - lastTxIndex; j++)
+        //After text
+        Console.ForegroundColor = ConsoleColor.White;
+        for (int j = 1; j + count + startIndex < userInput.Length; j++)
         {
-            stringNumber = userInput[lastTxIndex + j].ToString();
-            Console.Write(stringNumber);
+            Console.Write(userInput[j + count + startIndex]);
         }
 
-        //Adds the red text results together
-        long.TryParse(stringResult, out tempoResult);
-        totalResult += tempoResult;
+        //redTextResult
+        long.TryParse(redString, out tempResult);
+        totalResult += tempResult;
 
-        firstTxIndex++;
-        i = firstTxIndex;
-        lastTxIndex = i;
-        redTxIndex = 0;
-        stringResult = string.Empty;
-        isTextRed = false;
+        count = 0;
+        tempResult = 0;
+        startIndex++;
+        i = startIndex;
+        redString = string.Empty;
         Console.WriteLine();
     }
-    holdString = userInput[holdIndex].ToString();
-    lastTxIndex++;
-    redTxIndex++;
+    else if (i == userInput.Length - 1 || char.IsLetter(userInput[i]) || userInput[i] == '+'
+        || userInput[i] == '-' || userInput[i] == '/' || userInput[i] == '*')
+    {
+        count = 0;
+        startIndex++;
+        i = startIndex;
+        loopString = string.Empty;
+    }
+    count++;
+    holdString = userInput[startIndex].ToString();
 }
 
 Console.WriteLine($"\nTotal \"marked\" result: {totalResult}");
